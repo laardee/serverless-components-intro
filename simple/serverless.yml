@@ -1,0 +1,19 @@
+name: custom-component-project
+
+example:
+  component: './example'
+  inputs:
+    foo: bar
+
+example2:
+  component: './example'
+  inputs: ${example}
+
+lambda:
+  component: "@serverless/aws-lambda"
+  inputs:
+    env:
+      FOO: ${example2.foo}
+    code: ./code
+    handler: index.handler
+    runtime: nodejs10.x

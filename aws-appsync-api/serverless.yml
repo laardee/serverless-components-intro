@@ -1,0 +1,40 @@
+name: blog-api
+region: eu-west-1
+
+dynamoTable:
+  component: '@serverless/aws-dynamodb'
+  inputs:
+    name: blog-table
+    attributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+    keySchema:
+      - AttributeName: id
+        KeyType: HASH
+    region: ${region}
+
+api:
+  component: "@serverless/aws-app-sync"
+  inputs:
+    region: ${region}
+    name: blog-api
+    authenticationType: API_KEY
+    apiKeys:
+      - blog-api-key
+    schema: schema.graphql
+    dataSources:
+      - type: 'AMAZON_DYNAMODB'
+        name: 'dynamodb_ds'
+        config:
+          tableName: ${dynamoTable.name}
+    mappingTemplates:
+      - dataSource: 'dynamodb_ds'
+        type: 'Query'
+        field: 'getPost'
+        request: 'mapping-templates/get-post-request.vtl'
+        response: 'mapping-templates/get-post-response.vtl'
+      - dataSource: 'dynamodb_ds'
+        type: 'Mutation'
+        field: 'addPost'
+        request: 'mapping-templates/put-post-request.vtl'
+        response: 'mapping-templates/put-post-response.vtl'
