@@ -16,6 +16,7 @@ dynamoTable:
 api:
   component: "@serverless/aws-app-sync"
   inputs:
+    # apiId: nnn # if updating existing api
     region: ${region}
     name: blog-api
     authenticationType: API_KEY
