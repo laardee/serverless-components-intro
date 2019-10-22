@@ -1,5 +1,4 @@
-
-
+# example queries
 
 ```graphql
 mutation PutPost {
@@ -8,7 +7,6 @@ mutation PutPost {
   }
 }
 ```
-
 
 ```graphql
 query GetPost {
