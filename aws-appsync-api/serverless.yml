@@ -14,7 +14,7 @@ dynamoTable:
     region: ${region}
 
 api:
-  component: "@serverless/aws-app-sync"
+  component: '@serverless/aws-app-sync'
   inputs:
     # apiId: nnn # if updating existing api
     region: ${region}
