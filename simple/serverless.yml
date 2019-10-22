@@ -1,4 +1,5 @@
 name: custom-component-project
+region: eu-central-1
 
 example:
   component: './example'
@@ -12,6 +13,7 @@ example2:
 lambda:
   component: "@serverless/aws-lambda"
   inputs:
+    region: ${region}
     env:
       FOO: ${example2.foo}
     code: ./code
